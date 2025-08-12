@@ -1,0 +1,20 @@
+<div class="product-card">
+  <div class="card-image">
+    <img  [routerLink]="['/detail']"
+          [queryParams]="{ id: products[0].id }" 
+          [src]="products[0].image" alt="Stylish Sneakers" />
+    <span class="discount">-20%</span>
+  </div>
+  <div class="card-content">
+    <h3 class="product-name">{{ products[0].title }}</h3>
+      <p class="product-description" [routerLink]="['/detail']"
+      [queryParams]="{ id: products[0].id }">
+        {{ products[0].description }}
+      </p>
+    <div class="price">
+      <span class="current-price">{{ products[0].price | currency }}</span>
+      <span class="old-price">{{ products[0].oldPrice | currency }}</span>
+    </div>
+    <button class="add-to-cart" (click)="onProductSelect(products[0])">Add to Cart</button>
+  </div>
+</div>

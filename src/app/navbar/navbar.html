@@ -1,0 +1,20 @@
+<nav class="container_navbar">
+  <div class="Navbar" [class.active]="menuOpen">
+    <span>Shopping</span>
+
+    <button class="menu-toggle" (click)="toggleNavbar()">☰</button>
+
+    <div class="nav-links-container">
+      <ul class="nav-links">
+        <li><a routerLink="/" routerLinkActive="active" (click)="closeMenu()">Home</a></li>
+        <li><a routerLink="/about" routerLinkActive="active" (click)="closeMenu()">About</a></li>
+        <li><a routerLink="/services" routerLinkActive="active" (click)="closeMenu()">Service</a></li>
+        <li><a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a></li>
+      </ul>
+    </div>
+    <div class="login-container">
+      <a class="icon-cart" routerLink="/cart" routerLinkActive="active" (click)="closeMenu()"><i class='bx bx-cart-download'></i></a>
+      <button>Login</button>
+    </div>
+  </div>
+</nav>

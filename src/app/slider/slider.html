@@ -1,0 +1,12 @@
+<div class="slider-container">
+  <div
+    class="slider-track"
+    [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+  >
+    <div class="slide" *ngFor="let img of images">
+      <img [src]="img" alt="Slide image" />
+    </div>
+  </div>
+
+
+</div>
