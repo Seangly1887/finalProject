@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 import { trigger, state, style, animate, transition, } from '@angular/animations';
 
-
+declare var Swal: any;
 @Component({
   selector: 'app-cart',
   imports: [RouterLink, CurrencyPipe, FormsModule, NgFor, NgIf],
@@ -33,36 +33,52 @@ import { trigger, state, style, animate, transition, } from '@angular/animations
   ],
 })
 export class Cart {
-
   showPaymentPopup = false;
 
   constructor(public cartService: CartService) { }
 
-  openPayment() {
+  openPayment(): void {
     const cartItems = this.cartService.GetCartItems();
     const anySelected = cartItems.some(item => item.is_selected);
 
     if (!anySelected) {
-      alert('Please select at least one product before checkout.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'No product selected',
+        text: 'Please select at least one product before checkout.'
+      });
       return;
     }
 
-    // Delay to trigger CSS animation smoothly
+    // Trigger CSS animation
     this.showPaymentPopup = false;
     setTimeout(() => {
       this.showPaymentPopup = true;
     }, 10);
   }
 
-  closePayment() {
+  closePayment(): void {
     this.showPaymentPopup = false;
   }
-
-  submitPayment(form: any) {
+  submitPayment(form: any): void {
     if (form.invalid) return;
-    alert('Payment successful!');
-    this.showPaymentPopup = false;
     this.cartService.clearSelectedItems();
+    this.showPaymentPopup = false;
 
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Payment Successful',
+      text: 'Thank you for your purchase!'
+    });
   }
+  getSelectedTotal(): number {
+    return this.cartService.GetCartItems()
+      .filter(item => item.is_selected && item.qty > 0)
+      .reduce((total, item) => total + item.price * item.qty, 0);
+  }
+  getSelectedItems() {
+    return this.cartService.GetCartItems().filter(i => i.is_selected);
+  }
+
 }

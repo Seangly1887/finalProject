@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+declare var Swal: any;
 
 
 
@@ -39,13 +40,33 @@ export class CartService {
       localStorage.setItem('cartItems', JSON.stringify(this.Cart_item));
     }
   }
+
   removeItem(item: any) {
-    let index = this.Cart_item.findIndex(cartItem => cartItem.id === item.id);
-    if (index !== -1) {
-      this.Cart_item.splice(index, 1);
-      localStorage.setItem('cartItems', JSON.stringify(this.Cart_item));
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        let index = this.Cart_item.findIndex(cartItem => cartItem.id === item.id);
+        if (index !== -1) {
+          this.Cart_item.splice(index, 1);
+          localStorage.setItem('cartItems', JSON.stringify(this.Cart_item));
+        }
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      }
+    });
+
   }
+
   getCartTotal() {
     const total = this.Cart_item.reduce((acc, item) => {
       return acc + (item.is_selected ? item.price * item.qty : 0);

@@ -34,54 +34,43 @@
       </div>
     }
 <!-- Popup overlay -->
-<div
-  class="popup-overlay"
-  [class.show]="showPaymentPopup"
-  (click)="closePayment()"
->
-  <div class="popup-content" (click)="$event.stopPropagation()">
-    <h3>Payment Form</h3>
-    <form #paymentForm="ngForm" (ngSubmit)="submitPayment(paymentForm)">
-      <label>
-        Card Number
-        <input
-          name="cardNumber"
-          ngModel
-          required
-          minlength="16"
-          maxlength="16"
-          placeholder="1234 5678 9012 3456"
-        />
-      </label>
-
-      <label>
-        Expiry Date
-        <input
-          name="expiry"
-          ngModel
-          required
-          pattern="^(0[1-9]|1[0-2])\/?([0-9]{2})$"
-          placeholder="MM/YY"
-        />
-      </label>
-
-      <label>
-        CVV
-        <input
-          name="cvv"
-          type="password"
-          ngModel
-          required
-          minlength="3"
-          maxlength="4"
-          placeholder="123"
-        />
-      </label>
-
-      <button type="submit" [disabled]="paymentForm.invalid">
-        Pay {{ cartService.getCartTotal() | currency }}
-      </button>
-      <button type="button" (click)="closePayment()">Cancel</button>
-    </form>
+<div class="payment-popup" [class.show]="showPaymentPopup">
+  <div class="popup-content">
+    <h2>Selected Products</h2>
+    @for(item of cartService.GetCartItems(); track item.id){
+      @if(item.is_selected && item.qty > 0){
+        <div class="product-row">
+          <img [src]="item.image" alt="{{ item.name }}" class="product-image" />
+          <span>{{ item.title }}</span>
+            <span>{{ item.price | currency }}</span>
+          </div>
+          <div class="product-quantity">
+            <span>Quantity: {{ item.qty }}</span>
+            <span>Total: {{ item.price * item.qty | currency }}</span>
+          </div>  
+        } 
+      }
+      <h3>
+        Total:
+        <span>
+          {{getSelectedTotal() | currency}}
+        </span>
+      </h3>
+    
+      <form #paymentForm="ngForm" (ngSubmit)="submitPayment(paymentForm)">
+        <label>
+          Card Number:
+          <input type="text" name="cardNumber" ngModel required pattern="[0-9]{16}">
+        </label>
+        <label>
+          CVV:
+          <input type="password" name="cvv" ngModel required pattern="[0-9]{3}">
+        </label>
+        <div class="form-actions">
+          <button type="submit" [disabled]="paymentForm.invalid">Pay Now</button>
+          <button type="button" (click)="closePayment()">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
+
