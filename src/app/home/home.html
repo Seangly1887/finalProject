@@ -1,6 +1,9 @@
  <div class="container_slider">
         <app-slider></app-slider>
     </div>
+    <div>
+        <app-category></app-category>
+    </div>
 <div class="product-list">
     @for (item of productService.getProducts(); track item.id) {
         <app-product-list [products]="[item]" (productSelected)="AddToProductCart($event)"></app-product-list>

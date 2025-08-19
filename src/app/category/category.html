@@ -1,0 +1,22 @@
+<div class="categories-container">
+  <div class="categories-scroll"
+       #scrollContainer
+       (mousedown)="startDrag($event, scrollContainer)"
+       (mousemove)="onDrag($event, scrollContainer)"
+       (mouseup)="endDrag()"
+       (mouseleave)="endDrag()"
+       (touchstart)="startDrag($event, scrollContainer)"
+       (touchmove)="onDrag($event, scrollContainer)"
+       (touchend)="endDrag()">
+<!-- @for(category of categories ; track.id){
+
+} -->
+    <div class="category-item" *ngFor="let category of categories"
+         [routerLink]="['/category']"
+         [queryParams]="{ name: category.name }">
+      <img [src]="category.image" alt="{{category.name}}">
+      <span>{{category.name}}</span>
+    </div>
+
+  </div>
+</div>

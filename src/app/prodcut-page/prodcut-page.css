@@ -1,0 +1,19 @@
+.product-list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 26px;
+  
+}
+@media (max-width: 480px){
+    .product-list{
+        margin-top: 350px;
+    }
+}
+@media (min-width: 481px) and (max-width: 768px){
+.product-list{
+        margin-top: 50px;
+         gap: 10px;
+    }
+}

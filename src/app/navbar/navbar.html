@@ -3,17 +3,17 @@
     <span>Shopping</span>
 
     <button class="menu-toggle" (click)="toggleNavbar()">☰</button>
-
     <div class="nav-links-container">
       <ul class="nav-links">
         <li><a routerLink="/" routerLinkActive="active" (click)="closeMenu()">Home</a></li>
+        <li routerLink="/products" routerLinkActive="active" (click)="closeMenu()"><a>Product</a></li>
         <li><a routerLink="/about" routerLinkActive="active" (click)="closeMenu()">About</a></li>
         <li><a routerLink="/services" routerLinkActive="active" (click)="closeMenu()">Service</a></li>
         <li><a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a></li>
       </ul>
     </div>
     <div class="login-container">
-      <a class="icon-cart" routerLink="/cart" routerLinkActive="active" (click)="closeMenu()"><i class='bx bx-cart-download'></i></a>
+      <a class="icon-cart" routerLink="/cart" routerLinkActive="active" (click)="closeMenu()"><i class='bx bx-cart-download'><span class="numberCart">{{cartService.GetCartItems().length}}</span></i></a>
       <button>Login</button>
     </div>
   </div>

@@ -5,9 +5,11 @@ import { Detail } from './detail/detail';
 import { Contact } from './contact/contact';
 import { Serives } from './serives/serives';
 import { About } from './about/about';
+import { ProdcutPage } from './prodcut-page/prodcut-page';
 
 export const routes: Routes = [
     { path: '', component: Home },
+    { path: 'products', component: ProdcutPage },
     { path: 'cart', component: Cart },
     { path: 'detail', component: Detail },
     { path: 'contact', component: Contact },

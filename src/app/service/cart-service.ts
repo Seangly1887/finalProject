@@ -26,6 +26,7 @@ export class CartService {
   GetCartItems() {
     return this.Cart_item;
   }
+
   increaseQuantity(item: any) {
     let index = this.Cart_item.findIndex(cartItem => cartItem.id === item.id);
     if (index !== -1) {

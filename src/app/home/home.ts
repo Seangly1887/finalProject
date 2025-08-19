@@ -4,10 +4,11 @@ import { Slider } from "../slider/slider";
 import { CartService } from '../service/cart-service';
 import { ProductService } from '../service/product-service';
 import { Footer } from '../footer/footer';
+import { Category } from '../category/category';
 
 @Component({
   selector: 'app-home',
-  imports: [ProductList, Slider, Footer],
+  imports: [ProductList, Slider, Footer, Category],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })

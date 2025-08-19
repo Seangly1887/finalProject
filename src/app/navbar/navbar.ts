@@ -1,5 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CartService } from '../service/cart-service';
+import { ProductList } from '../product-list/product-list';
+
 import {
   trigger,
   state,
@@ -7,6 +10,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { ProductService } from '../service/product-service';
 @Component({
   selector: 'app-navbar',
   imports: [RouterLink],
@@ -31,6 +35,9 @@ import {
 })
 
 export class Navbar {
+  constructor(public cartService: CartService, public productService: ProductService) {
+
+  }
   menuOpen = false;
   toggleNavbar() {
     this.menuOpen = !this.menuOpen;

@@ -6,14 +6,14 @@
           <div class="item-details">
             <h4>{{item.title}}</h4>
             <p>{{item.description}}</p>
-            <p>${{item.price | currency}} </p>
+            <p class="item_price">${{item.price | currency}} </p>
           </div>
           <div class="item-quantity">
             <button (click)="cartService.decreaseQuantity(item)">-</button>
             <span>{{item.qty}}</span>
             <button (click)="cartService.increaseQuantity(item)">+</button>
           </div>
-          <div class="item-total">${{item.price * item.qty}}</div>
+          <div class="item-total">${{item.price * item.qty | currency}}</div>
           <div class="item-actions">
             <button class="remove-btn" (click)="cartService.removeItem(item)">✖</button>
             <input type="checkbox" class="item-checkbox" [checked]="item.is_selected " 
@@ -29,7 +29,7 @@
     }
     @if(cartService.GetCartItems().length > 0){
       <div class="cart-summary">
-        <h3>Total: <span>{{cartService.getCartTotal() | currency}} </span></h3>
+        <h3>Total: <span class="total">{{cartService.getCartTotal() | currency}} </span></h3>
         <button class="checkout-btn" (click)="openPayment()">Checkout </button>
       </div>
     }
@@ -42,15 +42,15 @@
         <div class="product-row">
           <img [src]="item.image" alt="{{ item.name }}" class="product-image" />
           <span>{{ item.title }}</span>
-            <span>{{ item.price | currency }}</span>
+            <span class="priceProduct">{{ item.price | currency }}</span>
           </div>
           <div class="product-quantity">
-            <span>Quantity: {{ item.qty }}</span>
-            <span>Total: {{ item.price * item.qty | currency }}</span>
+            <h6>Quantity: {{ item.qty }}</h6>
+            <h6>Total: {{ item.price * item.qty | currency }}</h6>
           </div>  
         } 
       }
-      <h3>
+      <h3 class="total">
         Total:
         <span>
           {{getSelectedTotal() | currency}}
